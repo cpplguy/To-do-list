@@ -186,7 +186,7 @@ document.querySelector("#submit").addEventListener("click", (event) => {
     });
     setTimeout(() => {
       alert("Task added");
-    }, 100);
+    }, 500);
   } else {
     alert("Please fill in all fields");
   }
