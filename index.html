@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content= "script-src 'self' 'unsafe-inline';"
+    />
+    <title>My Web Page</title>
+    <link rel="stylesheet" href="../stylesheets/main.css" />
+    <link rel="stylesheet" href="../stylesheets/settings.css" />
+    <!-- Montserrat for headings -->
+<link href="https://fonts.googleapis.com/css?family=Montserrat:700&display=swap" rel="stylesheet">
+<!-- Roboto for body, table, labels, inputs, buttons, footer -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
+<!-- Fira Mono for accent/code elements -->
+<link href="https://fonts.googleapis.com/css?family=Fira+Mono:400&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <nav>
+      <button id = "settings"></button>
+        <section id = "settingscontainer">
+        <h4>toggle nightmode</h4>
+        <div id="nightmodebutton">
+          <div id="circle"></div>
+        </div>
+        </section>
+    </nav>
+    <div id="tablecontainer">
+      <table>
+        <thead>
+          <tr id="header">
+            <th>task</th>
+            <th>date</th>
+            <th>time</th>
+            <th>status</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <h2>scroll to see more items</h2>
+    <div id="container">
+      <button id="addRow">Add Row</button>
+      <form>
+        <button id="x" type="button">X</button>
+        <label for="task">task</label>
+        <input
+          type="text"
+          id="task"
+          name="task"
+          placeholder="Enter your task"
+          required
+        />
+        <label for="date">date</label>
+        <input type="date" id="date" name="date" required />
+        <label for="time">time</label>
+        <input
+          type="time"
+          id="time"
+          name="time"
+          pattern="[0-9]{2}:[0-9]{2}"
+          placeholder="enter time for task"
+        />
+        <button id="submit">Submit Item</button>
+      </form>
+    </div>
+    <h3>color key</h3>
+    <ul id="colorkey">
+      <li><span id="red" class="color"></span>late</li>
+      <li><span id="yellow" class="color"></span>ongoing</li>
+      <li><span id="green" class="color"></span>finished</li>
+    </ul>
+    <footer>
+      <span id="copyright">&copy;</span>
+      Ramon Guo <span id="year"></span> <br />
+      all rights reserved <br />
+      <span id="tim"></span> <br />
+      <a href="mailto:ramonguo136@gmail.com" target="_blank"
+        >ramonguo136@gmail.com</a
+      >
+    </footer>
+    <script src="../scripts/main.js" type = "module"></script>
+  </body>
+  <!--woowwowwowwowowwowowowow-->
+</html>
