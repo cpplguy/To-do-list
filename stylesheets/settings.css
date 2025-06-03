@@ -35,6 +35,7 @@ nav{
 }
 #nightmodebutton{
     display:flex;
+    margin-top:0.5em;
     width:90px;
     height:30px;
     border:1px solid black;
@@ -49,7 +50,9 @@ h4{
     bottom:2.5px;
     font-size:1.25em;
     color:black;
-    font-family:Arial;
+    font-family:"inter", sans-serif;
+    box-shadow:0px 5px 25px 2px gray;
+    border-radius:50px;
 
 }
 #circle{
