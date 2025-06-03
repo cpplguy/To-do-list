@@ -5,6 +5,7 @@ const tableBody = document.querySelector("tbody");
 const table = document.querySelector("table");
 let date = new Date();
 const dateChecker = (row) => {
+  //gets the time from a row and converts it into time that is comparable with dateTime()
   let rowDate = new Date(row.children[1].textContent.trim());
   let rowTime = row.children[2].textContent.trim();
   let [rowHours, rowMinutes] = rowTime.split(":").map(Number);
@@ -12,6 +13,7 @@ const dateChecker = (row) => {
   return rowDate;
 };
 const statusChecker = () => {
+  //goes through every row and checks the current state of it and makes a color for it
   document.querySelectorAll("tr:not(#header)").forEach((row) => {
     if (row.children[3].textContent === "finished") {
       row.style.backgroundColor = "lime";
@@ -33,6 +35,7 @@ const settings = document.querySelector("#settings");
 const settingsContainer = document.querySelector("#settingscontainer");
 let settingsOpen = false;
 settings.addEventListener("click", () => {
+  //opens settings if it is closed and vice versa
   if (settingsOpen) {
     settingsContainer.style.transform = "translateY(-150%)";
     settingsContainer.style.opacity = "0";
@@ -44,8 +47,8 @@ settings.addEventListener("click", () => {
   }
 });
 const nightStatus = () => {
+   //checks the status for row but in nightmode
       document.querySelectorAll("tr:not(#header)").forEach((element) => {
-
   if (element.children[3].textContent === "finished") {
         element.style.backgroundColor = "darkgreen";
       } else if (element.children[3].textContent === "ongoing") {
@@ -58,12 +61,14 @@ const nightStatus = () => {
       } else {
         element.style.backgroundColor = "darkgray";
       }
-          });
+        element.style.color = "white";
+      });
 }
 let nightMode = localStorage.getItem("nightMode") === "true";
 const nightButton = document.querySelector("#nightmodebutton");
 const circle = document.querySelector("#circle");
 const neetMode = () => {
+  //function to make everything dark
   if (nightMode) {
     console.log(nightMode);
     circle.style.transform = "translateX(55px)";
@@ -97,6 +102,7 @@ const neetMode = () => {
 };
 
 nightButton.addEventListener("click", () => {
+  //saves the nightmode state in localStorage so it doesn't forget
   if (nightMode) {
     localStorage.setItem("nightMode", "false");
   } else {
@@ -105,29 +111,35 @@ nightButton.addEventListener("click", () => {
   nightMode = !nightMode;
   neetMode();
 });
+//display form when u click it
 document.querySelector("#addRow").addEventListener("click", () => {
   displayForm();
 });
+//hides form when you click it
 document.querySelector("#x").addEventListener("click", () => {
   hideForm();
 });
 let stats;
 const createRow = () => {
+  //creates row, it creates html element and adds the stuff from form into it
   let task = document.querySelector("#task").value;
   let date = document.querySelector("#date").value;
   let time = document.querySelector("#time").value;
   let b = document.createElement("tr");
 
   stats = "not done";
+  //jsons so that u can save to localstorage
   let JSONS = {
     task: task,
     date: date,
     time: time,
     status: stats,
   };
+  //makes key so nothing gets overridden in localstorage and sets id in html
   let key = `task_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
   b.setAttribute("data-id", key);
   localStorage.setItem(key, JSON.stringify(JSONS));
+  //escape html so no injections
   b.innerHTML = `<td>${escapeHTML(task)}</td>
                     <td>${escapeHTML(date)}</td>
                     <td>${escapeHTML(time)}</td>
@@ -138,6 +150,7 @@ const createRow = () => {
   Overflow();
   sortRows();
   requestAnimationFrame(() => {
+    // add show so cool animation when it appears
     document.querySelector(`tr[data-id="${key}"]`)?.classList.add("show");
     if(nightMode){
       nightStatus();
@@ -151,11 +164,12 @@ const Overflow = () => {
     document.querySelector("h2").style.opacity = "1";
     setTimeout(() => {
       document.querySelector("h2").style.opacity = "0";
-    }, 1500);
+    }, 1500);//updated the settimeout so it doesn't glitch
   }
 };
 const deleteRow = (key) => {
   let row = document.querySelector(`tr[data-id="${key}"]`);
+  // it gets the key from the row and deletes it. Cool animation when u delete it
   const confirmYes = confirm("Are you sure you want to delete this row?");
   if (row && confirmYes) {
     console.log("h");
@@ -165,7 +179,7 @@ const deleteRow = (key) => {
     localStorage.removeItem(key);
     setTimeout(() => {
       row.remove();
-    }, 1000);
+    }, 750);
     return;
   }
 };
@@ -207,13 +221,13 @@ const displayForm = () => {
   setTimeout(() => {
     x.disabled = false;
     submit.disabled = false;
-  }, 1000);
+  }, 1500);
 };
 const hideForm = () => {
   form.style.opacity = "0";
   setTimeout(() => {
     form.style.display = "none";
-  }, 1000);
+  }, 1250);
   addRow.style.display = "block";
   addRow.style.opacity = "100%";
 };
